@@ -38,7 +38,7 @@ export const Home = () => {
           </label>
           <input
             type="text"
-            placeholder="Ex. Hardvard"
+            placeholder="Ex. Harvard"
             className="input input-bordered w-full max-w-xs text-xs"
             onChange={(e) => setName(e.target.value)}
           />
