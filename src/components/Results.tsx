@@ -14,7 +14,7 @@ export const Results = (props: { nameProp: String; countryProp: String;}) => {
     const fetchData = async () => {
       const res = await fetch("https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json")
       const result = await res.json();
-      let filter = []
+      let filter: Data[] = []
 
 
       if(props.nameProp && props.countryProp){
@@ -48,7 +48,7 @@ export const Results = (props: { nameProp: String; countryProp: String;}) => {
       }
 
       filter.sort((a, b) =>{
-        return Number(b.name > a.name)
+        return Number((b.name ?? "") > (a.name ?? ""))
       })
 
       setData(filter);
