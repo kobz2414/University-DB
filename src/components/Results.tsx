@@ -7,8 +7,20 @@ interface Data {
   name?: String;
 }
 
-export const Results = (props: { nameProp: String; countryProp: String;}) => {
+export const Results = (props: { nameProp: string; countryProp: string;}) => {
   const [data, setData] = useState<Data[]>([]);
+
+  const filterAPI = (result: any, prop: string, filter: Data[], type: string) => {
+    result.forEach((university: any) => {
+      const query = type === "name" ? university.name.toLowerCase().includes(prop) : university.country.toLowerCase().includes(prop)
+
+      if(query){
+        if(!filter.some(data => data.country === university.country && data.name === university.name)){
+          filter.push(university)
+        }
+      }
+    })
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,23 +39,11 @@ export const Results = (props: { nameProp: String; countryProp: String;}) => {
         })
       }else{
         if(props.nameProp){
-          result.forEach((university: any) => {
-            if(university.name.toLowerCase().includes(props.nameProp.toLowerCase())){
-              if(!filter.some(data => data.country === university.country && data.name === university.name)){
-                filter.push(university)
-              }
-            }
-          })
+          filterAPI(result, props.nameProp, filter, "name")
         }
   
         if(props.countryProp){
-          result.forEach((university: any) => {
-            if(university.country.toLowerCase().includes(props.countryProp.toLowerCase())){
-              if(!filter.some(data => data.country === university.country && data.name === university.name)){
-                filter.push(university)
-              }
-            }
-          })
+          filterAPI(result, props.countryProp, filter, "country")
         }
       }
 
