@@ -1,14 +1,14 @@
 import React from "react";
-import { Navbar } from "./components/NavBar";
+import { Header } from "./components/Header";
 import { Home } from "./components/Home";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
     <>
-      <body className="h-screen">
-        <Navbar />
-        <Home />
-      </body>
+      <Header />
+      <Home />
+      <Footer />
     </>
   );
 }
